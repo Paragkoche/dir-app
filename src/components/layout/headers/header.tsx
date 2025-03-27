@@ -1,16 +1,27 @@
 import Logo from "@/components/Logo";
+import Menu, { ButtonMenu } from "@/components/ui/menu";
 import MenuButton from "@/components/ui/more-button";
+
 const Header = () => {
   return (
-    <div className="flex justify-between items-center h-[64px] p-5 relative z-20">
-      <div></div>
-      <div>
-        <Logo />
+    <header className="border-b border-b-[rgba(0,0,0,.1)] z-20 max-h-16 uppercase py-4 relative px-5 sm:py-4">
+      <div className="flex justify-between items-center    max-w-[1336px] mx-auto ">
+        <div className="hidden sm:block">
+          <nav className="flex gap-9">
+            <Menu />
+          </nav>
+        </div>
+        <div>
+          <Logo />
+        </div>
+        <div className="sm:hidden ">
+          <MenuButton />
+        </div>
+        <div className="hidden sm:flex gap-3 ">
+          <ButtonMenu />
+        </div>
       </div>
-      <div className="sm:hidden ">
-        <MenuButton />
-      </div>
-    </div>
+    </header>
   );
 };
 

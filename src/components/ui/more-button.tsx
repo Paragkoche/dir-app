@@ -1,12 +1,12 @@
 "use client";
-import { HeaderButtons, HeaderMenu, HeaderMenuType } from "@/data/header-manu";
+import { HeaderButtons, HeaderMenu, HeaderMenuType } from "@/data/header-menu";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-function SubMenu({
+export function SubMenu({
   v,
   i,
   onClick,
@@ -98,6 +98,7 @@ export default function HamburgerMenu() {
         animate={{
           top: isOpen ? 64 : "-100%",
           opacity: isOpen ? 1 : 0,
+          display: isOpen ? "block" : "none",
         }}
         className="absolute  -z-10 top-[64px] bg-[#fffdf5] w-screen  left-0 p-5"
       >
