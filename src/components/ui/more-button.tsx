@@ -46,7 +46,7 @@ function SubMenu({
         >
           {v.subData &&
             v.subData.map((sub, subIndex) => (
-              <Link href={sub.link!} key={subIndex}>
+              <Link href={sub.link!} onClick={onClick} key={subIndex}>
                 {sub.title}
               </Link>
             ))}
