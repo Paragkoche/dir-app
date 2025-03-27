@@ -1,5 +1,16 @@
+"use client";
+import { useRouter } from "next/navigation";
+
 const Logo = () => {
-  return <div>Enter</div>;
+  const router = useRouter();
+  return (
+    <div
+      onClick={() => router.push("/")}
+      className="cursor-pointer hover:text-[var(--primary)] transition-colors"
+    >
+      Great4U.com
+    </div>
+  );
 };
 
 export default Logo;
