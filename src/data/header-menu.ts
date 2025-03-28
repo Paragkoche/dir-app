@@ -4,6 +4,7 @@ export type HeaderMenuType = {
   type: "Link" | "SubMenu";
   subData?: HeaderMenuType[];
 };
+
 export const HeaderMenu: HeaderMenuType[] = [
   {
     link: "/",
@@ -14,22 +15,6 @@ export const HeaderMenu: HeaderMenuType[] = [
     link: "/",
     title: "Home",
     type: "Link",
-  },
-  {
-    title: "Category",
-    type: "SubMenu",
-    subData: [
-      {
-        title: "Model",
-        link: "/category/model",
-        type: "Link",
-      },
-      {
-        title: "Model",
-        link: "/category/model",
-        type: "Link",
-      },
-    ],
   },
 ];
 

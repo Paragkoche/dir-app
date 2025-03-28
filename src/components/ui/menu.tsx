@@ -54,8 +54,27 @@ export function SubMenu({
     </div>
   );
 }
-const Menu = () => {
-  return HeaderMenu.map((v, i) => (
+const Menu = ({
+  data,
+}: {
+  data: { name: string | null; slug: string | null }[] | null;
+}) => {
+  return (
+    [
+      ...HeaderMenu,
+      {
+        title: "Category",
+        type: "SubMenu",
+        subData:
+          data &&
+          data.map((v) => ({
+            title: v.name,
+            type: "Link",
+            link: `/category/${v.slug}`,
+          })),
+      },
+    ] as HeaderMenuType[]
+  ).map((v, i) => (
     <div key={i}>
       {v.type === "Link" ? (
         <Link

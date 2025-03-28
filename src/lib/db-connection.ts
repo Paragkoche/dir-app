@@ -1,11 +1,12 @@
 import { type CookieOptions, createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { createBrowserClient } from "@supabase/ssr";
+import { Database } from "@/types/db";
 
 export async function SSRcreateClient() {
   const cookieStore = await cookies();
 
-  const supabase = createServerClient(
+  const supabase = createServerClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
@@ -26,7 +27,7 @@ export async function SSRcreateClient() {
 }
 
 export function CSRcreateClient() {
-  return createBrowserClient(
+  return createBrowserClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   );

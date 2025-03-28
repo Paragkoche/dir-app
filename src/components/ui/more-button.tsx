@@ -56,7 +56,11 @@ export function SubMenu({
   );
 }
 
-export default function HamburgerMenu() {
+export default function HamburgerMenu({
+  data,
+}: {
+  data: { name: string | null; slug: string | null }[] | null;
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
@@ -103,7 +107,22 @@ export default function HamburgerMenu() {
         className="absolute  -z-10 top-[64px] bg-[#fffdf5] w-screen  left-0 p-5"
       >
         <nav className="flex flex-col gap-3">
-          {HeaderMenu.map((v, i) => (
+          {(
+            [
+              ...HeaderMenu,
+              {
+                title: "Category",
+                type: "SubMenu",
+                subData:
+                  data &&
+                  data.map((v) => ({
+                    title: v.name,
+                    type: "Link",
+                    link: `/category/${v.slug}`,
+                  })),
+              },
+            ] as HeaderMenuType[]
+          ).map((v, i) => (
             <div key={i}>
               {v.type === "Link" ? (
                 <Link
