@@ -100,11 +100,11 @@ export default function HamburgerMenu({
       </div>
       <motion.div
         animate={{
-          top: isOpen ? 64 : "-100%",
+          top: isOpen ? 60 : "-100%",
           opacity: isOpen ? 1 : 0,
           display: isOpen ? "block" : "none",
         }}
-        className="absolute  -z-10 top-[64px] bg-[#fffdf5] w-screen  left-0 p-5"
+        className="absolute  -z-10 top-[60px] bg-[#fffdf5] w-screen  left-0 p-5"
       >
         <nav className="flex flex-col gap-3">
           {(
