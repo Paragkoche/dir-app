@@ -1,3 +1,5 @@
+import { CSRcreateClient } from "@/lib/csr.supabase";
+
 export type MenuType = {
   title: string;
   href: string;
@@ -5,6 +7,8 @@ export type MenuType = {
   isNSFW: boolean;
   sub_menu?: MenuType[];
 };
+
+const data = await CSRcreateClient().from("category").select("name,slug");
 
 export const menu: MenuType[] = [
   {
@@ -31,18 +35,12 @@ export const menu: MenuType[] = [
     isNSFW: false,
     type: "DROP-DOWN",
     sub_menu: [
-      {
-        href: "/category/events",
-        title: "Events",
-        type: "LINK",
+      ...(data.data || [{ name: "DEMO", slug: "demo" }]).map((v) => ({
+        title: v.name ?? "Untitled",
+        href: "/category/" + v.slug,
+        type: "LINK" as const,
         isNSFW: false,
-      },
-      {
-        href: "/category/events",
-        title: "Events",
-        type: "LINK",
-        isNSFW: false,
-      },
+      })),
     ],
   },
 ];

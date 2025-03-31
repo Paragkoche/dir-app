@@ -1,5 +1,6 @@
 import Logo from "../../branding/logo";
 import LaptopMenu from "./laptop.menu";
+import MobileMenu from "./mobile.menu";
 
 const Header = () => {
   return (
@@ -8,6 +9,7 @@ const Header = () => {
         <Logo />
       </div>
       <LaptopMenu />
+      <MobileMenu />
     </header>
   );
 };

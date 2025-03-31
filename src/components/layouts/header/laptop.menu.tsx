@@ -70,7 +70,7 @@ const LaptopMenu = () => {
         {menuButton.map((v, i) =>
           v.type == "Fill" ? (
             <Button
-              className="bg-primary rounded-4xl text-white cursor-pointer hover:bg-black hover:text-white "
+              className="bg-primary uppercase rounded-4xl text-white cursor-pointer hover:bg-black hover:text-white "
               key={i}
             >
               {v.title}
@@ -78,7 +78,7 @@ const LaptopMenu = () => {
           ) : (
             <Button
               variant={"outline"}
-              className="border-black hover:text-white  rounded-4xl cursor-pointer hover:bg-black"
+              className="border-black uppercase hover:text-white  rounded-4xl cursor-pointer hover:bg-black"
               key={i}
             >
               {v.title}
