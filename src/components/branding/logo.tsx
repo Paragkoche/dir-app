@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Logo = () => {
   return (
-    <Link href="/" className="hover:text-primary cursor-pointer">
+    <Link href="/" className="hover:text-primary font-[500] cursor-pointer">
       TheGreat4u.com
     </Link>
   );
