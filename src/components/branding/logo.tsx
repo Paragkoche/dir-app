@@ -1,5 +1,11 @@
+import Link from "next/link";
+
 const Logo = () => {
-  return <h1>TheGreat4u.com</h1>;
+  return (
+    <Link href="/" className="hover:text-primary cursor-pointer">
+      TheGreat4u.com
+    </Link>
+  );
 };
 
 export default Logo;
