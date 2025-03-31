@@ -1,5 +1,5 @@
 const Logo = () => {
-  return <h1 className="text-2xl">TheGreat4u.com</h1>;
+  return <h1>TheGreat4u.com</h1>;
 };
 
 export default Logo;
