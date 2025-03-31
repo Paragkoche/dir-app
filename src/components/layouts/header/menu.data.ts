@@ -46,3 +46,22 @@ export const menu: MenuType[] = [
     ],
   },
 ];
+
+export type ButtonType = {
+  title: string;
+  link: string;
+  type: "Line" | "Fill";
+}[];
+
+export const menuButton: ButtonType = [
+  {
+    link: "/auth/login",
+    title: "Login",
+    type: "Fill",
+  },
+  {
+    link: "/auth/login",
+    title: "Register",
+    type: "Line",
+  },
+];

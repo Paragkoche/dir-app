@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { menu } from "./menu.data";
+import { menu, menuButton } from "./menu.data";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,12 +10,13 @@ import {
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 const LaptopMenu = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   return (
-    <div className="hidden lg:flex justify-between items-center">
-      <nav className="flex gap-2.5 uppercase">
+    <>
+      <nav className="hidden lg:flex gap-10 uppercase">
         {menu.map((v, i) =>
           v.type == "LINK" ? (
             <Link
@@ -65,8 +66,27 @@ const LaptopMenu = () => {
           )
         )}
       </nav>
-      <div></div>
-    </div>
+      <div className="hidden lg:flex gap-2.5 items-center">
+        {menuButton.map((v, i) =>
+          v.type == "Fill" ? (
+            <Button
+              className="bg-primary rounded-4xl text-white cursor-pointer hover:bg-black hover:text-white "
+              key={i}
+            >
+              {v.title}
+            </Button>
+          ) : (
+            <Button
+              variant={"outline"}
+              className="border-black hover:text-white  rounded-4xl cursor-pointer hover:bg-black"
+              key={i}
+            >
+              {v.title}
+            </Button>
+          )
+        )}
+      </div>
+    </>
   );
 };
 
