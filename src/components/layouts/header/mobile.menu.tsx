@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { menu, menuButton, MenuType } from "./menu.data";
+import { menuButton, MenuType, useMenu } from "./menu.data";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
@@ -12,6 +12,7 @@ const MobileMenu = () => {
       document.body.style.overflowY = isOpen ? "hidden" : "auto";
     }
   }, [isOpen]);
+  const menu = useMenu();
   return (
     <>
       <div

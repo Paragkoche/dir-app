@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { menu, menuButton } from "./menu.data";
+import { menuButton, useMenu } from "./menu.data";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 
 const LaptopMenu = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const menu = useMenu();
   return (
     <>
       <nav className="hidden lg:flex gap-10 uppercase">
