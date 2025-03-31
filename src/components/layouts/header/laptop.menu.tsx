@@ -45,7 +45,7 @@ const LaptopMenu = () => {
                   </motion.div>
                 </span>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="mt-[1rem] bg-transparent  shadow-none rounded-none border-[rgba(0,0,0,.1)] border-t-transparent flex flex-col gap-1.5 ">
+              <DropdownMenuContent className="mt-[1rem]  bg-background  shadow-none rounded-none border-[rgba(0,0,0,.1)] border-t-transparent flex flex-col gap-1.5 ">
                 {v.sub_menu?.map((sub_v, sub_i) => (
                   <DropdownMenuItem
                     className="cursor-pointer hover:bg-none"
