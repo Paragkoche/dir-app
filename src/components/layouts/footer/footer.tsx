@@ -8,11 +8,11 @@ const Footer = () => {
         <Logo className="text-white" />
       </div>
       <div className="flex flex-col lg:flex-row items-center justify-between py-5 px-8 xl:px-[150px] text-[rgba(225,225,225,0.5)] border-t border-t-[rgba(225,225,225,0.1)]">
-        <div>
+        <div className="text-[14px]">
           &copy; 2025-{new Date().getFullYear()} TheGreat4u.com. All right
           reserved.
         </div>
-        <div>
+        <div className="text-[14px]">
           Designed and developed by{" "}
           <Link
             className="hover:text-[#F3C31C]"
