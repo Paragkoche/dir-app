@@ -1,27 +1,24 @@
 "use client";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Tables } from "@/types/db";
 import { getCategory, getSubCategoryByCategoryId } from "@/utils/data-fetch";
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+
 const SearchFilter = () => {
-  const [category, setCategory] = useState<Tables<"category">[] | null>();
+  const [category, setCategory] = useState<Tables<"category">[] | null>(null);
   const [subCategory, setSubCategory] = useState<
     Tables<"subCategory">[] | null
-  >([
-    {
-      name: "select category",
-      created_at: "",
-      slug: "",
-      id: -1,
-    },
-  ]);
+  >([{ name: "Select Category", created_at: "", slug: "", id: -1 }]);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  // const [isCategoryOpen, setCategoryOpen] = useState(false);
+  // const [isSubCategoryOpen, setSubCategoryOpen] = useState(false);
+
   useEffect(() => {
     (async () => {
       const data = await getCategory();
@@ -29,87 +26,58 @@ const SearchFilter = () => {
     })();
   }, []);
 
-  const handleCategory = async (id: number) => {
-    setSubCategory([
-      {
-        name: "Loading...",
-        created_at: "",
-        slug: "",
-        id: 0,
-      },
-    ]);
-    const data = await getSubCategoryByCategoryId(id);
+  const handleCategoryChange = async (id: string) => {
+    setSelectedCategory(id);
+    console.log(selectedCategory);
 
-    if (data.data?.length == 0)
-      setSubCategory([
-        {
-          name: "No Subcategory",
-          created_at: "",
-          id: -1,
-          slug: "",
-        },
-      ]);
-    else setSubCategory(data.data);
+    setSubCategory([{ name: "Loading...", created_at: "", slug: "", id: 0 }]);
+    const data = await getSubCategoryByCategoryId(Number(id));
+
+    setSubCategory(
+      data.data?.length
+        ? data.data
+        : [{ name: "No Subcategory", created_at: "", id: -1, slug: "" }]
+    );
   };
-  const [isCategoryOpen, setCategoryOpen] = useState(false);
-  const [isSubCategoryOpen, setSubCategoryOpen] = useState(false);
+
   return (
     <div className="flex items-start justify-start lg:w-[80%] gap-1.5">
-      <DropdownMenu onOpenChange={(isOpen) => setCategoryOpen(isOpen)}>
-        <DropdownMenuTrigger className="px-1.5 py-1.5 bg-background outline-none rounded-2xl cursor-pointer">
-          <span
-            className={`flex items-center justify-between gap-5 ${
-              isCategoryOpen ? "text-primary" : ""
-            } hover:text-primary uppercase`}
-          >
-            Category
-            <motion.div
-              animate={{ rotate: isCategoryOpen ? -180 : 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-            >
-              <ChevronDown width={16} height={16} />
-            </motion.div>
-          </span>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="bg-background  shadow-none rounded-none border-[rgba(0,0,0,.1)]">
-          {category?.map((v, i) => (
-            <DropdownMenuItem
-              key={i}
-              onClick={async () => await handleCategory(v.id)}
-              className="hover:text-primary-foreground uppercase hover:bg-none cursor-pointer"
+      <Select onValueChange={handleCategoryChange}>
+        <SelectTrigger className="px-1.5 py-1.5 bg-background outline-none rounded-2xl cursor-pointer flex items-center justify-between gap-5 hover:text-primary uppercase">
+          <SelectValue
+            placeholder="Category"
+            className="hover:data-[placeholder]:text-primary"
+          />
+        </SelectTrigger>
+        <SelectContent className="bg-background shadow-none rounded-none border-[rgba(0,0,0,.1)] ">
+          {category?.map((v) => (
+            <SelectItem
+              key={v.id}
+              value={String(v.id)}
+              className="hover:text-primary uppercase hover:bg-transparent focus:text-primary cursor-pointer "
             >
               {v.name}
-            </DropdownMenuItem>
+            </SelectItem>
           ))}
-        </DropdownMenuContent>
-      </DropdownMenu>
-      <DropdownMenu onOpenChange={(isOpen) => setSubCategoryOpen(isOpen)}>
-        <DropdownMenuTrigger className="px-2 py-1.5 bg-background outline-none rounded-2xl cursor-pointer">
-          <span
-            className={`flex items-center justify-between gap-5 ${
-              isSubCategoryOpen ? "text-primary" : ""
-            } hover:text-primary uppercase`}
-          >
-            Sub-Category
-            <motion.div
-              animate={{ rotate: isSubCategoryOpen ? -180 : 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-            >
-              <ChevronDown width={16} height={16} />
-            </motion.div>
-          </span>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="bg-background   shadow-none rounded-none border-[rgba(0,0,0,.1)]">
-          {subCategory?.map((v, i) => (
-            <DropdownMenuItem
-              key={i}
-              className="hover:text-primary-foreground uppercase hover:bg-none cursor-pointer"
+        </SelectContent>
+      </Select>
+
+      <Select>
+        <SelectTrigger className="px-2 py-1.5 bg-background outline-none rounded-2xl cursor-pointer flex items-center justify-between gap-5 hover:text-primary uppercase">
+          <SelectValue placeholder="Sub-Category" />
+        </SelectTrigger>
+        <SelectContent className="bg-background shadow-none rounded-none border-[rgba(0,0,0,.1)]  ">
+          {subCategory?.map((v) => (
+            <SelectItem
+              key={v.id}
+              value={String(v.id)}
+              className="hover:text-primary uppercase hover:bg-transparent focus:text-primary cursor-pointer "
             >
               {v.name}
-            </DropdownMenuItem>
+            </SelectItem>
           ))}
-        </DropdownMenuContent>
-      </DropdownMenu>
+        </SelectContent>
+      </Select>
     </div>
   );
 };
