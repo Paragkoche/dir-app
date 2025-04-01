@@ -33,6 +33,10 @@ const page = () => {
           </div>
         </div>
       </section>
+      <section className="w-full px-[150px] flex justify-center h-[50vh] gap-12">
+        <div></div>
+        <div></div>
+      </section>
     </>
   );
 };
