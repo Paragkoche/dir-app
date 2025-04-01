@@ -14,7 +14,14 @@ const SearchFilter = () => {
   const [category, setCategory] = useState<Tables<"category">[] | null>();
   const [subCategory, setSubCategory] = useState<
     Tables<"subCategory">[] | null
-  >();
+  >([
+    {
+      name: "select category",
+      created_at: "",
+      slug: "",
+      id: -1,
+    },
+  ]);
   useEffect(() => {
     (async () => {
       const data = await getCategory();
