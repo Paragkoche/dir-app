@@ -4,6 +4,7 @@ import { ListPlusIcon, Search } from "lucide-react";
 import Image from "next/image";
 import SearchFilter from "./_components/search-filter";
 import AnimatedButton from "./_components/animation-button";
+import PostCard from "@/components/posts/post.cards";
 
 const page = () => {
   return (
@@ -34,8 +35,8 @@ const page = () => {
           </div>
         </div>
       </section>
-      <section className="w-full sm:px-[150px] px-[20px] flex flex-col sm:flex-row justify-center sm:h-[50vh] h-auto gap-12 mb-14">
-        <div className="sm:w-[20vw] w-full h-[50vh] sm:h-auto relative overflow-hidden rounded-3xl">
+      <section className="w-full lg:px-[150px] px-[20px] flex flex-col lg:flex-row justify-center lg:h-[50vh] h-auto gap-12 mb-14">
+        <div className="lg:w-[20vw] w-full h-[50vh] lg:h-auto relative overflow-hidden rounded-3xl">
           <Image
             src="/waiting-room.jpeg"
             alt="images"
@@ -79,6 +80,50 @@ const page = () => {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+      <section className="w-full sm:px-[150px] px-[20px] flex flex-col gap-3.5 mb-11">
+        <div className="flex flex-col gap-2.5">
+          <div className="flex items-center gap-2 text-primary">
+            <svg
+              width="17"
+              height="17"
+              viewBox="0 0 17 17"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clipPath="url(#clip0_52_202)">
+                <g clipPath="url(#clip1_52_202)">
+                  <path d="M9 17L12.8971 10.25H5.10289L9 17Z" fill="#143AA2" />
+                  <path
+                    d="M13.5 10L17.3971 3.25H9.60289L13.5 10Z"
+                    fill="#143AA2"
+                  />
+                  <path
+                    d="M4.5 10L8.39711 3.25H0.60289L4.5 10Z"
+                    fill="#143AA2"
+                  />
+                </g>
+              </g>
+              <defs>
+                <clipPath id="clip0_52_202">
+                  <rect width="17" height="17" fill="white" />
+                </clipPath>
+                <clipPath id="clip1_52_202">
+                  <rect width="18" height="18" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+            <p className="text-[#143AA2]">Sponsors</p>
+          </div>
+          <h1 className=" text-3xl uppercase">Popular Listing</h1>
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-y-7 gap-x-16 ">
+          <PostCard />
+          <PostCard />
+          <PostCard />
+          <PostCard />
+          <PostCard />
         </div>
       </section>
     </>
