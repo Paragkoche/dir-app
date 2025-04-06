@@ -67,7 +67,7 @@ const SubCategory = (props: { data: Tables<"subCategory">[] }) => {
           ))}
         </SelectContent>
       </Select>
-      {subCategory && subCategory.length > 0 && (
+      {subCategory && subCategory.length !== 0 && (
         <SubCategory data={subCategory} />
       )}
     </>
