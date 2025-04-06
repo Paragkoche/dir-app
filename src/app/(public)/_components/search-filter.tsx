@@ -12,9 +12,12 @@ import {
   getSubCategoryByCategoryId,
   getSubSubCategoryByCategoryId,
 } from "@/utils/data-fetch";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
-const SubCategory = (props: { data: Tables<"subCategory">[] }) => {
+const SubCategory = (props: {
+  data: Tables<"subCategory">[];
+  setSubCategoryData: Dispatch<SetStateAction<string | null>>;
+}) => {
   const [subCategory, setSubCategory] = useState<
     Tables<"subCategory">[] | null
   >([]);
@@ -25,6 +28,8 @@ const SubCategory = (props: { data: Tables<"subCategory">[] }) => {
   const handleSubCategoryChange = async (id: string) => {
     setSelectedSubCategory(id);
     console.log(selectedSubCategory);
+
+    props.setSubCategoryData(id);
 
     setSubCategory([
       {
@@ -43,11 +48,12 @@ const SubCategory = (props: { data: Tables<"subCategory">[] }) => {
 
     setSubCategory(
       data.data?.length && data.data.some((item) => item.sub_category)
-        ? [data.data[0].sub_category as Tables<"subCategory">]
+        ? data.data[0] && typeof data.data[0].sub_category !== "number"
+          ? [data.data[0].sub_category as unknown as Tables<"subCategory">]
+          : null
         : null
     );
   };
-  console.log(subCategory);
 
   return (
     <>
@@ -68,7 +74,10 @@ const SubCategory = (props: { data: Tables<"subCategory">[] }) => {
         </SelectContent>
       </Select>
       {subCategory && subCategory.length !== 0 && (
-        <SubCategory data={subCategory} />
+        <SubCategory
+          data={subCategory}
+          setSubCategoryData={props.setSubCategoryData}
+        />
       )}
     </>
   );
@@ -93,9 +102,9 @@ const SearchFilter = () => {
   ]);
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-
-  // const [isCategoryOpen, setCategoryOpen] = useState(false);
-  // const [isSubCategoryOpen, setSubCategoryOpen] = useState(false);
+  const [selectedSubCategory, setSubSelectedCategory] = useState<string | null>(
+    null
+  );
 
   useEffect(() => {
     (async () => {
@@ -115,6 +124,7 @@ const SearchFilter = () => {
   const handleCategoryChange = async (id: string) => {
     setSelectedCategory(id);
     console.log(selectedCategory);
+    console.log(selectedSubCategory);
 
     setSubCategory([
       {
@@ -163,7 +173,10 @@ const SearchFilter = () => {
           ))}
         </SelectContent>
       </Select>
-      <SubCategory data={subCategory} />
+      <SubCategory
+        data={subCategory}
+        setSubCategoryData={setSubSelectedCategory}
+      />
     </div>
   );
 };
