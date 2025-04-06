@@ -6,3 +6,9 @@ export const getCategory = async () =>
 
 export const getSubCategoryByCategoryId = async (id: number) =>
   CSRcreateClient().from("subCategory").select("*").eq("category_id", id);
+
+export const getSubSubCategoryByCategoryId = async (id: number) =>
+  CSRcreateClient()
+    .from("subCategory")
+    .select("*,sub_category(*)")
+    .eq("id", id);
