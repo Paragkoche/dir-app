@@ -28,13 +28,17 @@ const SlideShow: React.FC<SlideShowProps> = ({ images }) => {
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
           {images.map((image, index) => (
-            <div key={index} className="w-full flex-shrink-0">
+            <div
+              key={index}
+              className="w-full h-[75vh] flex-shrink-0 relative overflow-hidden"
+            >
               <Image
                 src={image}
                 alt={`Slide ${index + 1}`}
-                width={1920}
-                height={1080}
-                className="w-full h-auto"
+                layout="fill" // Ensures the image fills the parent div
+                objectFit="cover" // Prevents image distortion
+                priority // Loads the image ASAP for performance
+                className="w-full h-full overflow-hidden select-none"
               />
             </div>
           ))}
