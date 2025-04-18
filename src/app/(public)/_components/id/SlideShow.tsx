@@ -1,6 +1,7 @@
 "use client";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import React, { useState } from "react";
+import Image from "next/image";
 
 interface SlideShowProps {
   images: string[];
@@ -27,12 +28,15 @@ const SlideShow: React.FC<SlideShowProps> = ({ images }) => {
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
           {images.map((image, index) => (
-            <img
-              key={index}
-              src={image}
-              alt={`Slide ${index + 1}`}
-              className="w-full flex-shrink-0"
-            />
+            <div key={index} className="w-full flex-shrink-0">
+              <Image
+                src={image}
+                alt={`Slide ${index + 1}`}
+                width={1920}
+                height={1080}
+                className="w-full h-auto"
+              />
+            </div>
           ))}
         </div>
       </div>
