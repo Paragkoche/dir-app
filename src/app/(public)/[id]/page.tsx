@@ -8,6 +8,8 @@ interface PageProps {
 
 const page = async (props: PageProps) => {
   const { id } = await props.params;
+  console.log(id);
+
   return (
     <main className="w-full h-auto sm:px-[150px] px-[20px] pt-[50px]">
       <Bumper
